@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reusable Backend Modules Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+
+        #output {
+            margin-top: 20px;
+            text-align: left;
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Reusable Backend Modules Demo</h2>
+
+    <button onclick="loadUsers()">
+        Get Users
+    </button>
+
+    <div id="output">
+        Click "Get Users" to fetch data.
+    </div>
+
+    <script>
+        async function loadUsers() {
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:3000/users"
+                );
+
+                const data = await response.json();
+
+                document.getElementById(
+                    "output"
+                ).innerHTML =
+                    "<pre>" +
+                    JSON.stringify(
+                        data,
+                        null,
+                        2
+                    ) +
+                    "</pre>";
+
+            } catch (error) {
+
+                document.getElementById(
+                    "output"
+                ).innerHTML =
+                    "Error connecting to backend.";
+            }
+        }
+    </script>
+
+</body>
+</html>
